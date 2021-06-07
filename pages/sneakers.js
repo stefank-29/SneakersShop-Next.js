@@ -12,7 +12,7 @@ width: 50%; */
     line-height: 5rem;
     text-shadow: 0 0 0.5rem #235de6ff;
 `;
-const SneakersStyles = styled.div`
+export const SneakersStyles = styled.div`
     display: flex;
     flex-wrap: wrap;
 `;
