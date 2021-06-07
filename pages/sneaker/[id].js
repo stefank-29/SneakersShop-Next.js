@@ -2,7 +2,7 @@ import { useRouter } from 'next/dist/client/router';
 import styled from 'styled-components';
 import { maleSizes, sneakers, femaleSizes } from '../sneakers';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 const SneakerStyles = styled.div`
     position: relative;
@@ -104,8 +104,45 @@ const SneakerStyles = styled.div`
     }
 `;
 
+const AddButtonStyles = styled.button`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3rem;
+    padding: 1.2rem 1rem 1.2rem 3rem;
+    font-size: 2rem;
+    font-family: 'Avenir', sans-serif;
+    color: white;
+    background: dodgerblue;
+    background-size: 200% auto;
+    border: none;
+    border-radius: 5px;
+    transition: 0.7s;
+    box-shadow: 0 0 5px 1px rgba($color: #000000, $alpha: 0.1);
+    cursor: pointer;
+    &.added {
+        &::after {
+            content: '✔';
+        }
+    }
+    ::after {
+        content: '➡';
+        opacity: 0;
+        margin-left: 1rem;
+        transition: 0.5s;
+    }
+    :hover {
+        background-position: right center;
+        ::after {
+            opacity: 1;
+            padding-right: 0.8rem;
+        }
+    }
+`;
+
 export default function Sneaker() {
     const { query } = useRouter();
+    const addBtnRef = useRef();
     const sneakerId = query.id;
     const sneaker = sneakers.find((sneaker) => sneaker._id.$oid == sneakerId);
 
@@ -113,6 +150,7 @@ export default function Sneaker() {
 
     const [selectedSize, setSelectedSize] = useState(null);
     const [selectedIndex, setSelectedIndex] = useState(null);
+    const [buttonText, setButtonText] = useState('Add to cart');
 
     function sizeClass(size, index) {
         return `
@@ -127,8 +165,37 @@ export default function Sneaker() {
             return;
         }
 
+        if (selectedSize === null) {
+            setButtonText('Add to cart');
+        }
+
         setSelectedSize(sizes[index]);
         setSelectedIndex(index);
+    }
+
+    function toggleButton() {
+        setButtonText('Added to cart');
+        addBtnRef.current.className = `${addBtnRef.current.className} added`;
+        setTimeout(() => {
+            addBtnRef.current.className = addBtnRef.current.className.slice(
+                0,
+                -6
+            );
+            setButtonText('Add to cart');
+        }, 2000);
+    }
+
+    function addToCart(e) {
+        if (selectedSize === null) {
+            setButtonText('Choose size');
+            return;
+        }
+        if (sizes[selectedIndex].quantity === 0) {
+            return;
+        }
+
+        //   this.addProductToCart(payload);
+        toggleButton();
     }
 
     return (
@@ -171,6 +238,13 @@ export default function Sneaker() {
                         </div>
                     ))}
                 </div>
+                <AddButtonStyles
+                    className="addToCart"
+                    onClick={addToCart}
+                    ref={addBtnRef}
+                >
+                    {buttonText}
+                </AddButtonStyles>
             </div>
 
             {/* <div
