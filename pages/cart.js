@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useCart } from '../lib/cartState';
 import AddressForm from '../components/AddressForm';
 import Modal from '../components/Modal';
+import { useRouter } from 'next/dist/client/router';
 
 const ShoppingCartStyles = styled.div`
     position: relative;
@@ -112,8 +113,7 @@ const ShoppingCartStyles = styled.div`
             justify-content: flex-start;
             margin-top: 3rem;
             height: 3rem !important;
-            border: none;import Modal from '../components/Modal';
-
+            border: none;
 
             padding-bottom: 0.3rem;
             border-bottom: 1px solid rgba(0, 0, 0, 0.4);
@@ -138,14 +138,89 @@ const ShoppingCartStyles = styled.div`
             }
         }
     }
+    .emptyCart {
+        display: flex;
+        align-items: center;
+        width: 97%;
+        margin: 2rem auto;
+        padding: 1.5rem 2rem;
+        color: rgba(136, 15, 15, 0.7);
+        border: 1px solid rgba(136, 15, 15, 0.7);
+        background-color: rgba(136, 15, 15, 0.2);
+        font-size: 2rem;
+        font-family: 'Avenir', sans-serif;
+    }
+
+    .backToShop {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 3rem;
+        font-size: 2rem;
+        font-family: 'Avenir', sans-serif;
+        color: white;
+        background: dodgerblue;
+        background-size: 200% auto;
+        border: none;
+        border-radius: 5px;
+        transition: 0.7s;
+        box-shadow: 0 0 5px 1px rgba($color: #000000, $alpha: 0.1);
+        cursor: pointer;
+        &.added {
+            &::after {
+                content: '✔';
+            }
+        }
+        ::after {
+            content: '➡';
+            opacity: 0;
+            margin-left: 1rem;
+            transition: 0.5s;
+        }
+        :hover {
+            background-position: right center;
+            ::after {
+                opacity: 1;
+                padding-right: 0.8rem;
+            }
+        }
+        margin-top: 2rem;
+        margin-left: 2rem;
+        padding: 1.2rem 2.2rem 1.2rem 1rem;
+        transition: 0.5s;
+        &::after {
+            content: '';
+        }
+        &::before {
+            content: '⬅';
+            opacity: 0;
+            margin-right: 1rem;
+            transition: 0.5s;
+        }
+        &:hover {
+            background-position: right center;
+            padding-right: 1.8rem;
+            &::after {
+                opacity: 1;
+                padding: 0;
+            }
+            &::before {
+                opacity: 1;
+                padding-left: 0.8rem;
+            }
+        }
+    }
 `;
 
 export default function Cart() {
     const { items } = useCart();
+    const router = useRouter();
     const [modalVisible, setModalVisible] = useState(false);
     const [itemToRemove, setItemToRemove] = useState();
 
-    function backToShop() {}
+    function backToShop() {
+        router.push('/sneakers');
+    }
 
     function showModal(index) {
         setItemToRemove(index);

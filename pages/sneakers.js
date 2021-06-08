@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import Card from '../components/Card';
+import MultiSelect from 'react-multi-select-component';
+import { useEffect, useState } from 'react';
 
 const TitleStyle = styled.div`
     font-family: 'Roboto', sans-serif;
@@ -15,6 +17,25 @@ width: 50%; */
 export const SneakersStyles = styled.div`
     display: flex;
     flex-wrap: wrap;
+`;
+
+const FiltersStyles = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 97%;
+    // height: 15rem;
+    padding-bottom: 1rem;
+    /* background-color: dodgerblue; */
+    margin: 2rem 0;
+    border-bottom: 1px solid black;
+    .filters {
+        display: flex;
+        .dropdown-container {
+            width: 18rem;
+            margin-right: 1.5rem;
+        }
+    }
 `;
 
 export const sneakers = [
@@ -294,12 +315,94 @@ export const femaleSizes = [
 ];
 
 export default function Sneakers() {
+    const [sneakersItems, setSneakersItems] = useState([...sneakers]);
+    const [selectedGender, setSelectedGender] = useState([]);
+    const genderOptions = [
+        { label: 'Men', value: 'male' },
+        { label: 'Women', value: 'female' },
+        { label: 'Unisex', value: 'unisex' },
+    ];
+
+    const [selectedBrand, setSelectedBrand] = useState([]);
+    const brandOptions = [
+        { label: 'Nike', value: 'nike' },
+        { label: 'Adidas', value: 'adidas' },
+        { label: 'Puma', value: 'puma' },
+        { label: 'Reebok', value: 'reebok' },
+        { label: 'New Balance', value: 'newbalance' },
+    ];
+
+    const [selectedPrice, setSelectedPrice] = useState([]);
+    const priceOptions = [
+        { label: '0-99 $', value: 100 },
+        { label: '100-199 $', value: 200 },
+        { label: '200-299 $', value: 300 },
+    ];
+
+    useEffect(() => {
+        const filtered = sneakers.filter((item) => {
+            if (selectedGender.length === 0) {
+                return true;
+            }
+            for (let i = 0; i < selectedGender.length; i++) {
+                if (item.gender === selectedGender[i].value) {
+                    return true;
+                }
+            }
+        });
+        console.log(filtered);
+        setSneakersItems([]);
+        setSneakersItems([...filtered]);
+    }, [selectedGender, selectedBrand, selectedPrice]);
+
+    function filterSneakers() {}
+
     return (
         <div>
             <TitleStyle>Sneakers</TitleStyle>
-
+            <FiltersStyles>
+                <div className="filters">
+                    <MultiSelect
+                        hasSelectAll={false}
+                        labelledBy="Gender"
+                        onChange={setSelectedGender}
+                        options={genderOptions}
+                        overrideStrings={{
+                            search: 'Search gender',
+                            selectAll: 'Select All',
+                            selectSomeItems: 'Gender',
+                        }}
+                        value={selectedGender}
+                    />
+                    <MultiSelect
+                        hasSelectAll={false}
+                        labelledBy="Brand"
+                        onChange={setSelectedBrand}
+                        options={brandOptions}
+                        overrideStrings={{
+                            search: 'Search brand',
+                            selectAll: 'Select All',
+                            selectSomeItems: 'Brand',
+                        }}
+                        value={selectedBrand}
+                    />
+                    <MultiSelect
+                        hasSelectAll={false}
+                        labelledBy="Price"
+                        onChange={setSelectedPrice}
+                        options={priceOptions}
+                        overrideStrings={{
+                            search: 'Search price',
+                            selectAll: 'Select All',
+                            selectSomeItems: 'Price',
+                        }}
+                        value={selectedPrice}
+                    />
+                </div>
+                <div className="sort"></div>
+            </FiltersStyles>
             <SneakersStyles>
-                {sneakers.map((sneaker) => (
+                {sneakersItems.map((sneaker) => (
                     <Card key={sneaker._id.$oid} sneaker={sneaker} />
                 ))}
             </SneakersStyles>

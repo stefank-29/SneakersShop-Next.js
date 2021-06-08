@@ -259,7 +259,7 @@ export default function Sneaker() {
                         <p className="choose__size">Choose size:</p>
                     )}
                     <div className="sizes">
-                        {sizes.map((size, index) => (
+                        {sizes?.map((size, index) => (
                             <div
                                 className={`size ${sizeClass(size, index)}`}
                                 key={index}
