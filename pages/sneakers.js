@@ -340,7 +340,7 @@ export default function Sneakers() {
     ];
 
     useEffect(() => {
-        const filtered = sneakers.filter((item) => {
+        let filtered = sneakers.filter((item) => {
             if (selectedGender.length === 0) {
                 return true;
             }
@@ -350,8 +350,29 @@ export default function Sneakers() {
                 }
             }
         });
-        console.log(filtered);
-        setSneakersItems([]);
+        filtered = filtered.filter((item) => {
+            if (selectedBrand.length === 0) {
+                return true;
+            }
+            for (let i = 0; i < selectedBrand.length; i++) {
+                if (item.brand === selectedBrand[i].value) {
+                    return true;
+                }
+            }
+        });
+        filtered = filtered.filter((item) => {
+            if (selectedPrice.length === 0) {
+                return true;
+            }
+            for (let i = 0; i < selectedPrice.length; i++) {
+                if (
+                    item.price >= selectedPrice[i].value - 100 &&
+                    item.price < selectedPrice[i].value
+                ) {
+                    return true;
+                }
+            }
+        });
         setSneakersItems([...filtered]);
     }, [selectedGender, selectedBrand, selectedPrice]);
 
