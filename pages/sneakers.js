@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Card from '../components/Card';
 import MultiSelect from 'react-multi-select-component';
+import Select from 'react-select';
 import { useEffect, useState } from 'react';
 
 const TitleStyle = styled.div`
@@ -17,6 +18,9 @@ width: 50%; */
 export const SneakersStyles = styled.div`
     display: flex;
     flex-wrap: wrap;
+    .not-found {
+        font-size: 2rem;
+    }
 `;
 
 const FiltersStyles = styled.div`
@@ -32,6 +36,12 @@ const FiltersStyles = styled.div`
     .filters {
         display: flex;
         .dropdown-container {
+            width: 18rem;
+            margin-right: 1.5rem;
+        }
+    }
+    .sort {
+        .css-2b097c-container {
             width: 18rem;
             margin-right: 1.5rem;
         }
@@ -339,6 +349,15 @@ export default function Sneakers() {
         { label: '200-299 $', value: 300 },
     ];
 
+    const [selectedSort, setSelectedSort] = useState();
+    const sortingOptions = [
+        { label: 'A -> Z', value: 'alphaasc' },
+        { label: 'Z -> A', value: 'alphadesc' },
+        { label: 'Price(Low to High)', value: 'priceasc' },
+        { label: 'Price(High to Low)', value: 'pricedesc' },
+    ];
+
+    // filter
     useEffect(() => {
         let filtered = sneakers.filter((item) => {
             if (selectedGender.length === 0) {
@@ -375,6 +394,41 @@ export default function Sneakers() {
         });
         setSneakersItems([...filtered]);
     }, [selectedGender, selectedBrand, selectedPrice]);
+
+    function sortItems() {
+        let sorted = [];
+        if (selectedSort === undefined || selectedSort === null) {
+            return;
+        }
+        switch (selectedSort?.value) {
+            case 'alphaasc':
+                sorted = sneakersItems.sort((a, b) =>
+                    a.name > b.name ? 1 : -1
+                );
+                break;
+            case 'alphadesc':
+                sorted = sneakersItems.sort((a, b) =>
+                    a.name > b.name ? -1 : 1
+                );
+                break;
+            case 'priceasc':
+                sorted = sneakersItems.sort((a, b) => a.price - b.price);
+                break;
+            case 'pricedesc':
+                sorted = sneakersItems.sort((a, b) => b.price - a.price);
+                break;
+
+            default:
+                break;
+        }
+        console.log(sorted);
+        console.log(selectedSort.value);
+        setSneakersItems([...sorted]);
+    }
+    // sort
+    useEffect(() => {
+        sortItems();
+    }, [selectedSort]);
 
     function filterSneakers() {}
 
@@ -420,12 +474,21 @@ export default function Sneakers() {
                         value={selectedPrice}
                     />
                 </div>
-                <div className="sort"></div>
+                <div className="sort">
+                    <Select
+                        options={sortingOptions}
+                        onChange={setSelectedSort}
+                    />
+                </div>
             </FiltersStyles>
             <SneakersStyles>
-                {sneakersItems.map((sneaker) => (
-                    <Card key={sneaker._id.$oid} sneaker={sneaker} />
-                ))}
+                {sneakersItems.length > 0 ? (
+                    sneakersItems.map((sneaker) => (
+                        <Card key={sneaker._id.$oid} sneaker={sneaker} />
+                    ))
+                ) : (
+                    <p className="not-found">No items found...</p>
+                )}
             </SneakersStyles>
         </div>
     );
