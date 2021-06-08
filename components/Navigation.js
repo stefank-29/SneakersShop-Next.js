@@ -40,6 +40,31 @@ const NavigationStyles = styled.div`
         justify-content: center;
         transition: transform 0.2s;
         border-bottom: 2px solid transparent;
+        .cart {
+            position: relative;
+            .img {
+                height: 45px;
+                width: 45px;
+                margin: 0;
+            }
+            .items__num {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 2rem;
+                height: 2rem;
+                position: absolute;
+                top: -0.4rem;
+                right: -0.8rem;
+                padding: 1.3rem 1.4rem 1.3rem 1.3rem;
+                border-radius: 50%;
+                color: white;
+                background-color: #bb2457;
+                font-size: 1.2rem;
+                font-family: 'Lato', sans-serif;
+                font-weight: 700;
+            }
+        }
     }
     .nav__link {
         &.logo {
@@ -76,31 +101,7 @@ const NavigationStyles = styled.div`
     .nav__link--logo.router-link-exact-active {
         background: none;
     }
-    .nav__link .cart {
-        position: relative;
-    }
-    .nav__link .cart img {
-        height: auto;
-        width: 45px;
-        margin: 0;
-    }
-    .nav__link .cart .items__num {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 2rem;
-        height: 2rem;
-        position: absolute;
-        top: -0.4rem;
-        right: -0.8rem;
-        padding: 1.3rem 1.4rem 1.3rem 1.3rem;
-        border-radius: 50%;
-        color: white;
-        background-color: #bb2457;
-        font-size: 1.5rem;
-        font-family: 'Lato', sans-serif;
-        font-weight: 700;
-    }
+
     .router-link-exact-active {
         border-bottom-color: rgba(0, 0, 0, 0.2);
         border-right-color: rgba(0, 0, 0, 0.05);
@@ -111,7 +112,13 @@ const NavigationStyles = styled.div`
     }
 `;
 
+export let items;
+
 export default function Navigation() {
+    if (typeof window !== 'undefined') {
+        items = [...JSON.parse(localStorage.getItem('items'))];
+        console.log(items);
+    }
     return (
         <NavigationStyles>
             <div className="nav__section pages">
@@ -166,11 +173,22 @@ export default function Navigation() {
                     </Link>
                 </li>
                 <li className="nav__item">
-                    {/* <Link href="/cart">
+                    <Link href="/cart">
                         <a className="nav__link nav__link--cart">
-                            <div className="items__num">{1}</div>
+                            <div className="cart">
+                                <div className="img">
+                                    <Image
+                                        src="/images/shopping-cart.svg"
+                                        alt="cart icon"
+                                        layout="fill"
+                                    />
+                                </div>
+                                <div className="items__num">
+                                    {items?.length}
+                                </div>
+                            </div>
                         </a>
-                    </Link> */}
+                    </Link>
                 </li>
             </div>
         </NavigationStyles>

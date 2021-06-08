@@ -4,6 +4,7 @@ import { maleSizes, sneakers, femaleSizes, SneakersStyles } from '../sneakers';
 import Image from 'next/image';
 import { useRef, useState } from 'react';
 import Card from '../../components/Card';
+import { items } from '../../components/Navigation';
 
 const SneakerStyles = styled.div`
     margin: 3rem auto;
@@ -19,7 +20,7 @@ const SneakerStyles = styled.div`
         .image {
             position: relative;
             width: 60%;
-            height: 60rem;
+            height: 65rem;
             border-top-left-radius: 10px;
             overflow: hidden;
             /* img {
@@ -161,23 +162,21 @@ const AddButtonStyles = styled.button`
     }
 `;
 
+const similarSnickers = sneakers
+    .map((a) => ({ sort: Math.random(), value: a }))
+    .sort((a, b) => a.sort - b.sort)
+    .map((a) => a.value)
+    .slice(0, 4);
+
 export default function Sneaker() {
     const { query } = useRouter();
     const addBtnRef = useRef();
+    const [addedClass, setAddedClass] = useState('');
+
     const sneakerId = query.id;
     const sneaker = sneakers.find((sneaker) => sneaker._id.$oid == sneakerId);
 
     const sizes = sneaker?.gender === 'male' ? maleSizes : femaleSizes;
-
-    const similarSnickers = (
-        sneaker?.gender === 'male'
-            ? sneakers.filter((s) => s.gender === 'male')
-            : sneakers.filter((s) => s.gender === 'female')
-    )
-        .map((a) => ({ sort: Math.random(), value: a }))
-        .sort((a, b) => a.sort - b.sort)
-        .map((a) => a.value)
-        .slice(0, 4);
 
     const [selectedSize, setSelectedSize] = useState(null);
     const [selectedIndex, setSelectedIndex] = useState(null);
@@ -206,14 +205,16 @@ export default function Sneaker() {
 
     function toggleButton() {
         setButtonText('Added to cart');
-        addBtnRef.current.className = `${addBtnRef.current.className} added`;
+        setAddedClass('added');
         setTimeout(() => {
-            addBtnRef.current.className = addBtnRef.current.className.slice(
-                0,
-                -6
-            );
+            setAddedClass('');
             setButtonText('Add to cart');
         }, 2000);
+    }
+
+    function addProductToCart(sneaker) {
+        items.push(sneaker);
+        localStorage.setItem('items', JSON.stringify(items));
     }
 
     function addToCart(e) {
@@ -225,7 +226,8 @@ export default function Sneaker() {
             return;
         }
 
-        //   this.addProductToCart(payload);
+        const payload = { product: sneaker, size: { ...selectedSize } };
+        addProductToCart(payload);
         toggleButton();
     }
 
@@ -271,7 +273,7 @@ export default function Sneaker() {
                         ))}
                     </div>
                     <AddButtonStyles
-                        className="addToCart"
+                        className={`addToCart ${addedClass}`}
                         onClick={addToCart}
                         ref={addBtnRef}
                     >
