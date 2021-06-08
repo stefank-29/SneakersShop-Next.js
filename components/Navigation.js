@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
+import { useCart } from '../lib/cartState';
 
 const NavigationStyles = styled.div`
     display: flex;
@@ -112,13 +113,14 @@ const NavigationStyles = styled.div`
     }
 `;
 
-export let items;
-
 export default function Navigation() {
-    if (typeof window !== 'undefined') {
-        items = [...JSON.parse(localStorage.getItem('items'))];
-        console.log(items);
-    }
+    const { items } = useCart();
+
+    // if (typeof window !== 'undefined') {
+    //     setItems([...JSON.parse(localStorage.getItem('items'))]);
+    //     console.log(items);
+    // }
+
     return (
         <NavigationStyles>
             <div className="nav__section pages">
@@ -183,9 +185,7 @@ export default function Navigation() {
                                         layout="fill"
                                     />
                                 </div>
-                                <div className="items__num">
-                                    {items?.length}
-                                </div>
+                                <div className="items__num">{items.length}</div>
                             </div>
                         </a>
                     </Link>

@@ -4,7 +4,8 @@ import { maleSizes, sneakers, femaleSizes, SneakersStyles } from '../sneakers';
 import Image from 'next/image';
 import { useRef, useState } from 'react';
 import Card from '../../components/Card';
-import { items } from '../../components/Navigation';
+import A from '../../components/Navigation';
+import { useCart } from '../../lib/cartState';
 
 const SneakerStyles = styled.div`
     margin: 3rem auto;
@@ -173,6 +174,8 @@ export default function Sneaker() {
     const addBtnRef = useRef();
     const [addedClass, setAddedClass] = useState('');
 
+    const { addToCart } = useCart();
+
     const sneakerId = query.id;
     const sneaker = sneakers.find((sneaker) => sneaker._id.$oid == sneakerId);
 
@@ -213,11 +216,10 @@ export default function Sneaker() {
     }
 
     function addProductToCart(sneaker) {
-        items.push(sneaker);
-        localStorage.setItem('items', JSON.stringify(items));
+        addToCart(sneaker);
     }
 
-    function addToCart(e) {
+    function addToCartt(e) {
         if (selectedSize === null) {
             setButtonText('Choose size');
             return;
@@ -274,7 +276,7 @@ export default function Sneaker() {
                     </div>
                     <AddButtonStyles
                         className={`addToCart ${addedClass}`}
-                        onClick={addToCart}
+                        onClick={addToCartt}
                         ref={addBtnRef}
                     >
                         {buttonText}
