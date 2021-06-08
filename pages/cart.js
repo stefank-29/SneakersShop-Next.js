@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import Image from 'next/image';
+import { useCart } from '../lib/cartState';
+import AddressForm from '../components/AddressForm';
+import Modal from '../components/Modal';
 
 const ShoppingCartStyles = styled.div`
     position: relative;
@@ -54,13 +57,16 @@ const ShoppingCartStyles = styled.div`
         // border-top: 1px solid rgba(0,0,0, 0.8);
     }
     .cart_item {
+        min-width: 50rem;
         display: flex;
         align-items: center;
         width: 97%;
         margin: 1rem auto;
         border: 1px solid rgba(0, 0, 0, 0.1);
         .img {
+            position: relative;
             width: 16rem;
+            height: 16rem;
         }
         .details {
             display: flex;
@@ -82,21 +88,35 @@ const ShoppingCartStyles = styled.div`
             height: 15rem;
             font-size: 2rem;
             padding: 0 2rem;
+            margin-left: 4rem;
             .removeBtn {
                 font-size: 1.7rem;
                 font-family: 'Avenir', sans-serif;
                 border: 1px solid rgba(0, 0, 0, 0.4);
-                background-color: rgba($color: $lightblue, $alpha: 0.3);
+                background-color: rgba(30, 144, 255, 0.5);
                 padding: 1rem 2rem;
                 cursor: pointer;
                 transition: all 0.3s;
-                &:hover {
+                :hover {
                     color: white;
-                    background-color: rgba($color: $blue, $alpha: 0.8);
+                    background-color: rgba(30, 144, 255, 0.8);
                 }
             }
         }
+        .remove {
+            margin-left: auto;
+            margin-right: 3rem;
+        }
         &.header {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 3rem;
+            height: 3rem !important;
+            border: none;import Modal from '../components/Modal';
+
+
+            padding-bottom: 0.3rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.4);
             .price {
                 height: 3rem;
             }
@@ -116,27 +136,32 @@ const ShoppingCartStyles = styled.div`
                 margin-left: -3rem;
                 width: 22rem;
             }
-            display: flex;
-            justify-content: flex-start;
-            margin-top: 3rem;
-            height: 3rem !important;
-            border: none;
-            padding-bottom: 0.3rem;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.4);
         }
     }
 `;
 
 export default function Cart() {
-    const items = ['a'];
-    const [modalVisible, setModalVisible] = useState();
+    const { items } = useCart();
+    const [modalVisible, setModalVisible] = useState(false);
+    const [itemToRemove, setItemToRemove] = useState();
 
     function backToShop() {}
 
-    function showModal(index) {}
+    function showModal(index) {
+        setItemToRemove(index);
+        setModalVisible(true);
+    }
 
-    function cartTotalPrice() {}
+    function cartTotalPrice() {
+        return items.reduce((a, b) => {
+            return a + b.product.price;
+        }, 0);
+    }
 
+    if (typeof window == 'undefined') {
+        // ssr local storage bug
+        return null;
+    }
     return (
         <ShoppingCartStyles>
             <div className="title">Your cart</div>
@@ -165,27 +190,22 @@ export default function Cart() {
 
             {items.map((item, index) => (
                 <div key={index} className="cart_item">
-                    <div className="cart_item__img">
+                    <div className="img">
                         <Image
                             src={`/uploads/${item?.product?.photo}`}
                             alt="sneaker photo"
                             layout="fill"
                         />
                     </div>
-                    <div className="cart_item__details">
+                    <div className="details">
                         <p>{item?.product?.name}</p>
                         <div>Size: {item?.size?.number}</div>
                     </div>
-                    <div className="cart_item__price">
+                    <div className="price">
                         <div>{item?.product?.price} $</div>
                     </div>
-                    <div className="cart_item__price">
-                        <div>0,00%</div>
-                    </div>
-                    <div className="cart_item__price">
-                        <div>{item?.product?.price} $</div>
-                    </div>
-                    <div className="cart_item__remove">
+
+                    <div className="remove">
                         <div
                             onClick={() => showModal(index)}
                             className="removeBtn"
@@ -199,8 +219,20 @@ export default function Cart() {
             {items.length > 0 && (
                 <div className="total">
                     <span>Total:</span>
-                    <span className="total__price">{cartTotalPrice} $</span>
+                    <span className="total__price">{cartTotalPrice()} $</span>
                 </div>
+            )}
+            {items.length > 0 && (
+                <div v-if="items.length !== 0" class="title">
+                    Shipping Address
+                </div>
+            )}
+            {items.length > 0 && <AddressForm />}
+            {modalVisible && (
+                <Modal
+                    setModalVisible={setModalVisible}
+                    itemIndex={itemToRemove}
+                />
             )}
         </ShoppingCartStyles>
     );
