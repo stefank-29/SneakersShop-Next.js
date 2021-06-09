@@ -3,6 +3,7 @@ import Card from '../components/Card';
 import MultiSelect from 'react-multi-select-component';
 import Select from 'react-select';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/dist/client/router';
 
 const TitleStyle = styled.div`
     font-family: 'Roboto', sans-serif;
@@ -26,6 +27,7 @@ export const SneakersStyles = styled.div`
 const FiltersStyles = styled.div`
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     justify-content: space-between;
     width: 97%;
     // height: 15rem;
@@ -44,6 +46,25 @@ const FiltersStyles = styled.div`
         .css-2b097c-container {
             width: 18rem;
             margin-right: 1.5rem;
+        }
+    }
+
+    @media all and (max-width: 600px) {
+        width: 100%;
+        .filters {
+            width: 100%;
+            display: block;
+            .dropdown-container {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+        }
+        .sort {
+            width: 100%;
+            display: block;
+            .css-2b097c-container {
+                width: 100%;
+            }
         }
     }
 `;
@@ -324,7 +345,10 @@ export const femaleSizes = [
     },
 ];
 
-export default function Sneakers() {
+export default function Sneakers({ search }) {
+    const { query } = useRouter();
+    const [searchQuery, setSearchQuery] = useState(query.search);
+
     const [sneakersItems, setSneakersItems] = useState([...sneakers]);
     const [selectedGender, setSelectedGender] = useState([]);
     const genderOptions = [
@@ -356,6 +380,11 @@ export default function Sneakers() {
         { label: 'Price(Low to High)', value: 'priceasc' },
         { label: 'Price(High to Low)', value: 'pricedesc' },
     ];
+
+    //* ako sam vec na sneakers strani
+    if (query.search !== searchQuery) {
+        setSearchQuery(query.search);
+    }
 
     // filter
     useEffect(() => {
@@ -429,6 +458,19 @@ export default function Sneakers() {
     useEffect(() => {
         sortItems();
     }, [selectedSort]);
+
+    useEffect(() => {
+        if (searchQuery == undefined) {
+            return;
+        }
+        console.log(searchQuery);
+        let filtered = sneakers.filter((item) => {
+            //console.log(item.name.toLowerCase());
+            return item.name.toLowerCase().includes(searchQuery);
+        });
+        console.log(filtered);
+        setSneakersItems([...filtered]);
+    }, [searchQuery, query.search]);
 
     function filterSneakers() {}
 

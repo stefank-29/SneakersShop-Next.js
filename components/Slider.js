@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import {
     FaChevronLeft,
     FaChevronRight,
@@ -125,11 +126,15 @@ export default function Slider() {
     return (
         <SliderStyles>
             <div id="slider">
-                <Image
-                    src={`/images/banners/banner${index}.jpg`}
-                    alt="banner"
-                    layout="fill"
-                />
+                <Link href="/sneakers">
+                    <a>
+                        <Image
+                            src={`/images/banners/banner${index}.jpg`}
+                            alt="banner"
+                            layout="fill"
+                        />
+                    </a>
+                </Link>
                 <span onClick={previousImage} className="arrow" id="left">
                     <FaChevronLeft color="dodgerblue" />
                 </span>

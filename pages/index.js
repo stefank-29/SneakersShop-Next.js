@@ -6,6 +6,7 @@ import Slider from '../components/Slider';
 import styled from 'styled-components';
 
 import { FaAngleDoubleDown } from 'react-icons/fa';
+import Link from 'next/link';
 
 const TitleStyle = styled.div`
     font-family: 'Roboto', sans-serif;
@@ -71,43 +72,55 @@ export default function Home() {
             </HomeStyles>
             <CardsStyles id="cards">
                 <CardStyles>
-                    <div className="img">
-                        <Image
-                            src="/images/tike-mockup/headline_1_adidas_brand_800x800.jpg"
-                            alt="headline"
-                            layout="fill"
-                        />
-                    </div>
-                    <div className="info">
-                        <p className="brand">adidas</p>
-                        <p>Check out the latest styles</p>
-                    </div>
+                    <Link href="/sneakers?search=adidas">
+                        <a>
+                            <div className="img">
+                                <Image
+                                    src="/images/tike-mockup/headline_1_adidas_brand_800x800.jpg"
+                                    alt="headline"
+                                    layout="fill"
+                                />
+                            </div>
+                            <div className="info">
+                                <p className="brand">adidas</p>
+                                <p>Check out the latest styles</p>
+                            </div>
+                        </a>
+                    </Link>
                 </CardStyles>
                 <CardStyles>
-                    <div className="img">
-                        <Image
-                            src="/images/tike-mockup/headline_2_reebok_brand_800x800.jpg"
-                            alt="headline"
-                            layout="fill"
-                        />
-                    </div>
-                    <div className="info">
-                        <p className="brand">Reebok</p>
-                        <p>Check out the latest styles</p>
-                    </div>
+                    <Link href="/sneakers?search=reebok">
+                        <a>
+                            <div className="img">
+                                <Image
+                                    src="/images/tike-mockup/headline_2_reebok_brand_800x800.jpg"
+                                    alt="headline"
+                                    layout="fill"
+                                />
+                            </div>
+                            <div className="info">
+                                <p className="brand">Reebok</p>
+                                <p>Check out the latest styles</p>
+                            </div>
+                        </a>
+                    </Link>
                 </CardStyles>
                 <CardStyles>
-                    <div className="img">
-                        <Image
-                            src="/images/tike-mockup/newbalance.jpg"
-                            alt="headline"
-                            layout="fill"
-                        />
-                    </div>
-                    <div className="info">
-                        <p className="brand">New Balance</p>
-                        <p>Check out the latest styles</p>
-                    </div>
+                    <Link href="/sneakers?search=new balance">
+                        <a>
+                            <div className="img">
+                                <Image
+                                    src="/images/tike-mockup/newbalance.jpg"
+                                    alt="headline"
+                                    layout="fill"
+                                />
+                            </div>
+                            <div className="info">
+                                <p className="brand">New Balance</p>
+                                <p>Check out the latest styles</p>
+                            </div>
+                        </a>
+                    </Link>
                 </CardStyles>
             </CardsStyles>
         </>

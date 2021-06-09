@@ -64,6 +64,7 @@ const GlobalStyles = createGlobalStyle`
         }
     }
 
+
     /* font u bodiju se ne odnosi na button */
     button{
         font-family: 'radnika_next', --apple-system, BlinkMacSystemFont, 'Segoe UI',
@@ -78,6 +79,10 @@ const InnerStyles = styled.div`
     max-width: 1400px;
     min-height: calc(100vh - 60px);
     padding: 2rem 0;
+    @media all and (max-width: 900px) {
+        max-width: 900px;
+        padding: 2rem;
+    }
 `;
 
 export default function Page({ children }) {
