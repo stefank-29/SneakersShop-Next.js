@@ -81,14 +81,39 @@ const LoginFormStyles = styled.form`
             }
         }
     }
+    @media all and (max-width: 1100px) {
+        h2 {
+            width: 75%;
+            padding-bottom: 1rem;
+        }
+        .form__block {
+            width: 80%;
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
+    @media all and (max-width: 550px) {
+        h2 {
+            width: 75%;
+            padding-bottom: 1rem;
+        }
+        .form__block {
+            width: 100%;
+            margin-left: 0;
+            margin-right: 0;
+        }
+        .form-inner {
+            width: 100%;
+        }
+        .info {
+            width: 100%;
+        }
+    }
 `;
 
 export default function Login() {
     function handleSubmit(e) {
         e.preventDefault();
-
-        // stateovi za errore
-        // validacija
     }
     return (
         <LoginFormStyles

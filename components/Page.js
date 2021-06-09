@@ -71,6 +71,8 @@ const GlobalStyles = createGlobalStyle`
         Roboto, Oxygen, Ubuntu, Cantarell,
         'Open Sans', 'Helvetica Neue', sans-serif;
     }
+
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 `;
 
 const InnerStyles = styled.div`

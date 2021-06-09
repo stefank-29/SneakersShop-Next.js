@@ -142,6 +142,7 @@ const NavigationStyles = styled.div`
             margin-top: ${(props) => props.marginTop};
         }
         .nav__link {
+            height: 8rem;
             width: 100%;
             margin-right: 0;
         }
@@ -230,9 +231,18 @@ export default function Navigation() {
                 <div className="nav__section pages">
                     <li
                         className="nav__item logo"
-                        onClick={() => setMenuVisible(false)}
+                        onClick={() => {
+                            setMenuVisible(false);
+                            setSearchVisible(false);
+                        }}
                     >
-                        <Link href="/" onClick={() => setMenuVisible(false)}>
+                        <Link
+                            href="/"
+                            onClick={() => {
+                                setMenuVisible(false);
+                                setSearchVisible(false);
+                            }}
+                        >
                             <a className={`nav__link`}>
                                 <Image
                                     className="logo"
@@ -246,11 +256,17 @@ export default function Navigation() {
                     </li>
                     <li
                         className="nav__item"
-                        onClick={() => setMenuVisible(false)}
+                        onClick={() => {
+                            setMenuVisible(false);
+                            setSearchVisible(false);
+                        }}
                     >
                         <Link
                             href="/sneakers"
-                            onClick={() => setMenuVisible(false)}
+                            onClick={() => {
+                                setMenuVisible(false);
+                                setSearchVisible(false);
+                            }}
                         >
                             <a
                                 className={`nav__link ${
@@ -265,7 +281,10 @@ export default function Navigation() {
                     </li>
                     <li
                         className="nav__item"
-                        onClick={() => setMenuVisible(false)}
+                        onClick={() => {
+                            setMenuVisible(false);
+                            setSearchVisible(false);
+                        }}
                     >
                         <Link href="/sneakers">
                             <a
@@ -279,11 +298,17 @@ export default function Navigation() {
                     </li>
                     <li
                         className="nav__item"
-                        onClick={() => setMenuVisible(false)}
+                        onClick={() => {
+                            setMenuVisible(false);
+                            setSearchVisible(false);
+                        }}
                     >
                         <Link
                             href="/about"
-                            onClick={() => setMenuVisible(false)}
+                            onClick={() => {
+                                setMenuVisible(false);
+                                setSearchVisible(false);
+                            }}
                         >
                             <a
                                 className={`nav__link ${
@@ -296,11 +321,17 @@ export default function Navigation() {
                     </li>
                     <li
                         className="nav__item"
-                        onClick={() => setMenuVisible(false)}
+                        onClick={() => {
+                            setMenuVisible(false);
+                            setSearchVisible(false);
+                        }}
                     >
                         <Link
                             href="/shops"
-                            onClick={() => setMenuVisible(false)}
+                            onClick={() => {
+                                setMenuVisible(false);
+                                setSearchVisible(false);
+                            }}
                         >
                             <a
                                 className={`nav__link ${
@@ -327,11 +358,17 @@ export default function Navigation() {
                     </li>
                     <li
                         className="nav__item"
-                        onClick={() => setMenuVisible(false)}
+                        onClick={() => {
+                            setMenuVisible(false);
+                            setSearchVisible(false);
+                        }}
                     >
                         <Link
                             href="/register"
-                            onClick={() => setMenuVisible(false)}
+                            onClick={() => {
+                                setMenuVisible(false);
+                                setSearchVisible(false);
+                            }}
                         >
                             <a
                                 className={`nav__link ${
@@ -346,11 +383,17 @@ export default function Navigation() {
                     </li>
                     <li
                         className="nav__item"
-                        onClick={() => setMenuVisible(false)}
+                        onClick={() => {
+                            setMenuVisible(false);
+                            setSearchVisible(false);
+                        }}
                     >
                         <Link
                             href="/login"
-                            onClick={() => setMenuVisible(false)}
+                            onClick={() => {
+                                setMenuVisible(false);
+                                setSearchVisible(false);
+                            }}
                         >
                             <a
                                 className={`nav__link ${
@@ -363,11 +406,17 @@ export default function Navigation() {
                     </li>
                     <li
                         className="nav__item"
-                        onClick={() => setMenuVisible(false)}
+                        onClick={() => {
+                            setMenuVisible(false);
+                            setSearchVisible(false);
+                        }}
                     >
                         <Link
                             href="/logout"
-                            onClick={() => setMenuVisible(false)}
+                            onClick={() => {
+                                setMenuVisible(false);
+                                setSearchVisible(false);
+                            }}
                         >
                             <a
                                 className={`nav__link ${
@@ -380,7 +429,10 @@ export default function Navigation() {
                     </li>
                     <li
                         className="nav__item"
-                        onClick={() => setMenuVisible(false)}
+                        onClick={() => {
+                            setMenuVisible(false);
+                            setSearchVisible(false);
+                        }}
                     >
                         <Link href="/cart">
                             <a

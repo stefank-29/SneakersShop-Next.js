@@ -40,6 +40,7 @@ const SneakerStyles = styled.div`
             flex-direction: column;
             align-items: flex-end;
             h1 {
+                text-align: right;
                 font-size: 3rem;
                 font-weight: 600;
                 font-family: 'Avenir', sans-serif;
@@ -64,7 +65,7 @@ const SneakerStyles = styled.div`
         .price {
             p {
                 font-size: 2rem;
-                font-weight: 500;
+                font-weight: 700;
                 font-family: 'Lato', sans-serif;
             }
         }
@@ -106,6 +107,90 @@ const SneakerStyles = styled.div`
                     opacity: 0.3;
                     cursor: default;
                 }
+            }
+        }
+    }
+    @media all and (max-width: 900px) {
+        height: auto;
+        width: 100%;
+        margin-top: 1rem;
+        padding-bottom: 1rem;
+        .top {
+            width: 100%;
+            flex-direction: column;
+            .image {
+                position: relative;
+                width: 100%;
+                height: 55rem;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+            }
+            .details {
+                position: relative;
+                width: 100%;
+                padding: 2rem;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                h1 {
+                    text-align: right;
+                    font-size: 2.5rem;
+                }
+                .choose__size {
+                    font-size: 1.7rem;
+                    font-family: 'Roboto', sans-serif;
+                    margin-bottom: 1rem;
+                }
+            }
+
+            .sizes {
+                margin-top: 0rem;
+                display: flex;
+                justify-content: flex-end;
+                flex-wrap: wrap;
+                width: 100%;
+            }
+        }
+    }
+    @media all and (max-width: 550px) {
+        height: auto;
+        width: 100%;
+        margin-top: 1rem;
+        padding-bottom: 1rem;
+        .top {
+            width: 100%;
+            flex-direction: column;
+            .image {
+                position: relative;
+                width: 100%;
+                height: 40rem;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+            }
+            .details {
+                position: relative;
+                width: 100%;
+                padding: 2rem;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                h1 {
+                    text-align: right;
+                    font-size: 2.5rem;
+                }
+                .choose__size {
+                    font-size: 1.7rem;
+                    font-family: 'Roboto', sans-serif;
+                    margin-bottom: 1rem;
+                }
+            }
+
+            .sizes {
+                margin-top: 0rem;
+                display: flex;
+                justify-content: flex-end;
+                flex-wrap: wrap;
+                width: 100%;
             }
         }
     }

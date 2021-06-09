@@ -49,7 +49,7 @@ const CardStyles = styled.div`
         text-align: left;
         span {
             font-size: 1.5rem;
-            font-weight: 500;
+            font-weight: 700;
             font-family: 'Lato', sans-serif;
         }
     }
@@ -72,14 +72,15 @@ const CardStyles = styled.div`
         }
         cursor: pointer;
     }
-    @media all and (max-width: 900px) {
+    @media all and (max-width: 1000px) {
         width: calc(50% - 4rem);
     }
     @media all and (max-width: 550px) {
         width: 100%;
+        margin-bottom: 1rem !important;
     }
     :hover{
-        transform: scale(1.05);
+        transform: scale(1.03);
     }
 }
 
