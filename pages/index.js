@@ -59,6 +59,21 @@ const CardStyles = styled.div`
             font-size: 2.3rem;
         }
     }
+    @media all and (max-width: 900px) {
+        min-height: 50rem;
+        width: calc(50% - 4rem);
+        .img {
+            height: 35rem;
+        }
+    }
+    @media all and (max-width: 550px) {
+        min-height: 35rem;
+        max-height: 40rem;
+        width: 100%;
+        .img {
+            height: 25rem;
+        }
+    }
 `;
 export default function Home() {
     return (

@@ -176,6 +176,7 @@ const SearchStyles = styled.div`
     .searchInput {
         height: 100%;
         min-width: 100%;
+        width: 150%;
         background-color: whitesmoke;
         border: none;
         outline: none;
@@ -227,8 +228,11 @@ export default function Navigation() {
                 marginTop={menuVisible ? '3rem' : 0}
             >
                 <div className="nav__section pages">
-                    <li className="nav__item logo">
-                        <Link href="/">
+                    <li
+                        className="nav__item logo"
+                        onClick={() => setMenuVisible(false)}
+                    >
+                        <Link href="/" onClick={() => setMenuVisible(false)}>
                             <a className={`nav__link`}>
                                 <Image
                                     className="logo"
@@ -240,8 +244,14 @@ export default function Navigation() {
                             </a>
                         </Link>
                     </li>
-                    <li className="nav__item">
-                        <Link href="/sneakers">
+                    <li
+                        className="nav__item"
+                        onClick={() => setMenuVisible(false)}
+                    >
+                        <Link
+                            href="/sneakers"
+                            onClick={() => setMenuVisible(false)}
+                        >
                             <a
                                 className={`nav__link ${
                                     router.pathname == '/sneakers'
@@ -253,7 +263,10 @@ export default function Navigation() {
                             </a>
                         </Link>
                     </li>
-                    <li className="nav__item">
+                    <li
+                        className="nav__item"
+                        onClick={() => setMenuVisible(false)}
+                    >
                         <Link href="/sneakers">
                             <a
                                 className={`nav__link ${
@@ -264,8 +277,14 @@ export default function Navigation() {
                             </a>
                         </Link>
                     </li>
-                    <li className="nav__item">
-                        <Link href="/about">
+                    <li
+                        className="nav__item"
+                        onClick={() => setMenuVisible(false)}
+                    >
+                        <Link
+                            href="/about"
+                            onClick={() => setMenuVisible(false)}
+                        >
                             <a
                                 className={`nav__link ${
                                     router.pathname == '/about' ? 'active' : ''
@@ -275,8 +294,14 @@ export default function Navigation() {
                             </a>
                         </Link>
                     </li>
-                    <li className="nav__item">
-                        <Link href="/shops">
+                    <li
+                        className="nav__item"
+                        onClick={() => setMenuVisible(false)}
+                    >
+                        <Link
+                            href="/shops"
+                            onClick={() => setMenuVisible(false)}
+                        >
                             <a
                                 className={`nav__link ${
                                     router.pathname == '/shops' ? 'active' : ''
@@ -300,8 +325,14 @@ export default function Navigation() {
                             />
                         </form>
                     </li>
-                    <li className="nav__item">
-                        <Link href="/register">
+                    <li
+                        className="nav__item"
+                        onClick={() => setMenuVisible(false)}
+                    >
+                        <Link
+                            href="/register"
+                            onClick={() => setMenuVisible(false)}
+                        >
                             <a
                                 className={`nav__link ${
                                     router.pathname == '/register'
@@ -313,8 +344,14 @@ export default function Navigation() {
                             </a>
                         </Link>
                     </li>
-                    <li className="nav__item">
-                        <Link href="/login">
+                    <li
+                        className="nav__item"
+                        onClick={() => setMenuVisible(false)}
+                    >
+                        <Link
+                            href="/login"
+                            onClick={() => setMenuVisible(false)}
+                        >
                             <a
                                 className={`nav__link ${
                                     router.pathname == '/login' ? 'active' : ''
@@ -324,8 +361,14 @@ export default function Navigation() {
                             </a>
                         </Link>
                     </li>
-                    <li className="nav__item">
-                        <Link href="/logout">
+                    <li
+                        className="nav__item"
+                        onClick={() => setMenuVisible(false)}
+                    >
+                        <Link
+                            href="/logout"
+                            onClick={() => setMenuVisible(false)}
+                        >
                             <a
                                 className={`nav__link ${
                                     router.pathname == '/logout' ? 'active' : ''
@@ -335,7 +378,10 @@ export default function Navigation() {
                             </a>
                         </Link>
                     </li>
-                    <li className="nav__item">
+                    <li
+                        className="nav__item"
+                        onClick={() => setMenuVisible(false)}
+                    >
                         <Link href="/cart">
                             <a
                                 className={`nav__link nav__link--cart ${

@@ -61,6 +61,28 @@ const RegisterFormStyles = styled.form`
             background-color: #00897b;
         }
     }
+    @media all and (max-width: 1100px) {
+        h2 {
+            width: 75%;
+            padding-bottom: 1rem;
+        }
+        .form__block {
+            width: 80%;
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
+    @media all and (max-width: 550px) {
+        h2 {
+            width: 75%;
+            padding-bottom: 1rem;
+        }
+        .form__block {
+            width: 100%;
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
 `;
 
 export default function Register() {
