@@ -16,8 +16,7 @@ const ShoppingCartStyles = styled.div`
     background-color: rgba(255, 255, 255, 0.93);
     min-height: 70rem;
     // border-radius: 10px;
-    box-shadow: 0 0 10px rgba($color: rgb(0, 0, 0), $alpha: 0.2),
-        0 3px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2), 0 3px 10px rgba(0, 0, 0, 0.1);
     .title {
         display: block;
         width: 97%;
@@ -210,6 +209,91 @@ const ShoppingCartStyles = styled.div`
             }
         }
     }
+
+    @media all and (max-width: 550px) {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 1rem auto;
+        padding-bottom: 1rem;
+        .title {
+            display: block;
+            width: 90%;
+        }
+        .total {
+            display: block;
+            width: 80%;
+
+            span {
+                margin-left: 2rem;
+            }
+            .price {
+                font-weight: 700;
+                font-family: 'Lato', sans-serif;
+            }
+            &::before {
+                width: 50%;
+            }
+        }
+        .cart_item {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 30rem !important;
+            min-width: 10rem;
+            overflow: auto;
+            margin: 1rem auto;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            .img {
+                position: relative;
+                width: 16rem;
+                height: 16rem;
+            }
+            .details {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                width: 10rem;
+                height: 15rem;
+                font-size: 2rem;
+                padding: 1rem 3rem;
+            }
+            .price,
+            .remove {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                width: 10rem;
+                height: 15rem;
+                font-size: 2rem;
+                padding: 0 2rem;
+                margin-left: 4rem;
+                .removeBtn {
+                    font-size: 1.7rem;
+                    font-family: 'Avenir', sans-serif;
+                    border: 1px solid rgba(0, 0, 0, 0.4);
+                    background-color: rgba(30, 144, 255, 0.5);
+                    padding: 1rem 2rem;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                    :hover {
+                        color: white;
+                        background-color: rgba(30, 144, 255, 0.8);
+                    }
+                }
+            }
+            .remove {
+                margin-left: auto;
+                margin-right: 1rem;
+            }
+            &.header {
+                display: none;
+            }
+        }
+    }
 `;
 
 export default function Cart() {
@@ -294,7 +378,7 @@ export default function Cart() {
             {items.length > 0 && (
                 <div className="total">
                     <span>Total:</span>
-                    <span className="total__price">{cartTotalPrice()} $</span>
+                    <span className="price">{cartTotalPrice()} $</span>
                 </div>
             )}
             {items.length > 0 && (

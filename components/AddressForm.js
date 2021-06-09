@@ -6,19 +6,16 @@ const FormStyles = styled.form`
     margin-bottom: 4rem;
     width: 97%;
     margin: 1rem auto;
-    background: rgba($color: #ffffff, $alpha: 0.5);
-    /* display: flex;
+    background: rgba(255, 255, 255, 0.5);
+    display: flex;
     flex-wrap: wrap;
-    align-items: center; */
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     input,
     textarea,
     select {
         font-size: 1.5rem;
         width: 100%;
         padding: 12px;
-        border: 1px solid $grey;
+        border: 1px solid rgba(0, 0, 0, 0.3);
         border-radius: 4px;
         outline: none;
         &.input {
@@ -54,7 +51,7 @@ const FormStyles = styled.form`
         border: none;
         border-radius: 5px;
         transition: 0.7s;
-        box-shadow: 0 0 5px 1px rgba($color: #000000, $alpha: 0.1);
+        box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
         cursor: pointer;
         &.added {
             &::after {
@@ -81,6 +78,32 @@ const FormStyles = styled.form`
 
         font-size: 1.8rem !important;
         font-family: 'Avenir', sans-serif;
+    }
+    @media all and (max-width: 1100px) {
+        h2 {
+            width: 75%;
+            padding-bottom: 1rem;
+        }
+        .form__block {
+            width: 80%;
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
+    @media all and (max-width: 550px) {
+        h2 {
+            width: 75%;
+            padding-bottom: 1rem;
+        }
+        .form__block {
+            width: 100%;
+            margin-left: 0;
+            margin-right: 0;
+            padding: 0;
+        }
+        .confirm_order {
+            width: 15rem !important;
+        }
     }
 `;
 
