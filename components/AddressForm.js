@@ -33,7 +33,7 @@ const FormStyles = styled.form`
         width: 40%;
     }
     .form__block {
-        width: 80%;
+        width: 40%;
         padding-left: 4rem;
         margin-right: 5rem;
     }

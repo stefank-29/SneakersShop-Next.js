@@ -224,7 +224,6 @@ const ShoppingCartStyles = styled.div`
         .total {
             display: block;
             width: 80%;
-
             span {
                 margin-left: 2rem;
             }
@@ -239,38 +238,40 @@ const ShoppingCartStyles = styled.div`
         .cart_item {
             display: flex;
             align-items: center;
-            width: 100%;
-            max-width: 30rem !important;
+            width: 95%;
             min-width: 10rem;
             overflow: auto;
             margin: 1rem auto;
-            border: 1px solid rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.2);
             .img {
                 position: relative;
-                width: 16rem;
-                height: 16rem;
+                min-width: 12rem;
+                height: 12rem;
             }
             .details {
                 display: flex;
-                flex-direction: column;
+                flex-direction: row;
                 justify-content: flex-start;
-                align-items: flex-start;
-                width: 10rem;
+                align-items: center;
+                min-width: 25rem;
                 height: 15rem;
-                font-size: 2rem;
+                font-size: 1.8rem;
                 padding: 1rem 3rem;
+                > * {
+                    margin-right: 2rem;
+                }
             }
             .price,
             .remove {
                 display: flex;
-                flex-direction: column;
+                flex-direction: row;
                 justify-content: center;
-                align-items: flex-start;
-                width: 10rem;
+                align-items: center;
+                min-width: 15rem;
                 height: 15rem;
                 font-size: 2rem;
-                padding: 0 2rem;
-                margin-left: 4rem;
+                padding: 0 1rem;
+                margin-left: 1rem;
                 .removeBtn {
                     font-size: 1.7rem;
                     font-family: 'Avenir', sans-serif;
