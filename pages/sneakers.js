@@ -466,7 +466,7 @@ export default function Sneakers({ search }) {
         console.log(searchQuery);
         let filtered = sneakers.filter((item) => {
             //console.log(item.name.toLowerCase());
-            return item.name.toLowerCase().includes(searchQuery);
+            return item.name.toLowerCase().includes(searchQuery.toLowerCase());
         });
         console.log(filtered);
         setSneakersItems([...filtered]);

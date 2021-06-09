@@ -5,6 +5,7 @@ import Image from 'next/image';
 import SearchField from 'react-search-field';
 import { useCart } from '../lib/cartState';
 import { useRouter } from 'next/dist/client/router';
+import { FaBars, FaSearch } from 'react-icons/fa';
 
 const NavigationStyles = styled.div`
     display: flex;
@@ -23,7 +24,7 @@ const NavigationStyles = styled.div`
     }
 
     .nav__link {
-        max-width: 15rem;
+        //max-width: 15rem;
         position: relative;
         height: 9rem;
         font-family: 'Avenir', sans-serif;
@@ -117,23 +118,72 @@ const NavigationStyles = styled.div`
     .react-search-field {
         margin-right: 2rem;
     }
+    .expand {
+        display: none;
+    }
 
     @media all and (max-width: 600px) {
+        align-items: center;
         .nav__section {
             display: block;
             width: 100%;
             overflow: hidden;
         }
-        .nav__link {
-            width: 100%;
-        }
+
         .react-search-field {
-            display: block;
+            display: none;
             width: 20rem;
+            visibility: hidden;
         }
         .react-search-field-button {
             display: none;
         }
+        .user {
+            margin-top: ${(props) => props.marginTop};
+        }
+        .nav__link {
+            width: 100%;
+            margin-right: 0;
+        }
+        .nav__item {
+            display: ${(props) => props.menu};
+        }
+        .logo {
+            display: block;
+        }
+        .expand {
+            display: flex;
+            height: 100%;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 2rem;
+            color: white;
+            font-size: 3rem;
+            .search {
+                margin-right: 2rem;
+                cursor: pointer;
+            }
+        }
+    }
+`;
+
+const SearchStyles = styled.div`
+    width: 100%;
+    height: 5rem;
+    display: none;
+    justify-content: flex-start;
+    background-color: whitesmoke;
+    .searchInput {
+        height: 100%;
+        min-width: 100%;
+        background-color: whitesmoke;
+        border: none;
+        outline: none;
+        font-size: 1.5rem;
+        padding: 1rem;
+    }
+    @media all and (max-width: 600px) {
+        display: flex;
     }
 `;
 
@@ -141,6 +191,9 @@ export default function Navigation() {
     const { items } = useCart();
     const [query, setQuery] = useState();
     const router = useRouter();
+
+    const [menuVisible, setMenuVisible] = useState(false);
+    const [searchVisible, setSearchVisible] = useState(false);
 
     function onSubmit(e) {
         e.preventDefault();
@@ -155,130 +208,169 @@ export default function Navigation() {
         setQuery(value);
     }
 
+    function onChangeInput(e) {
+        setQuery(e.target.value);
+    }
+
+    function expandMenu() {
+        setMenuVisible(!menuVisible);
+    }
+
+    function expandSearch() {
+        setSearchVisible(!searchVisible);
+    }
+
     return (
-        <NavigationStyles>
-            <div className="nav__section pages">
-                <li className="nav__item">
-                    <Link href="/">
-                        <a className={`nav__link`}>
-                            <Image
-                                className="logo"
-                                src="/images/logo1.png"
-                                alt="logo"
-                                width={100}
-                                height={80}
+        <>
+            <NavigationStyles
+                menu={menuVisible ? 'block' : 'none'}
+                marginTop={menuVisible ? '3rem' : 0}
+            >
+                <div className="nav__section pages">
+                    <li className="nav__item logo">
+                        <Link href="/">
+                            <a className={`nav__link`}>
+                                <Image
+                                    className="logo"
+                                    src="/images/logo1.png"
+                                    alt="logo"
+                                    width={100}
+                                    height={80}
+                                />
+                            </a>
+                        </Link>
+                    </li>
+                    <li className="nav__item">
+                        <Link href="/sneakers">
+                            <a
+                                className={`nav__link ${
+                                    router.pathname == '/sneakers'
+                                        ? 'active'
+                                        : ''
+                                }`}
+                            >
+                                Sneakers
+                            </a>
+                        </Link>
+                    </li>
+                    <li className="nav__item">
+                        <Link href="/sneakers">
+                            <a
+                                className={`nav__link ${
+                                    router.pathname == '/brands' ? 'active' : ''
+                                }`}
+                            >
+                                Brands
+                            </a>
+                        </Link>
+                    </li>
+                    <li className="nav__item">
+                        <Link href="/about">
+                            <a
+                                className={`nav__link ${
+                                    router.pathname == '/about' ? 'active' : ''
+                                }`}
+                            >
+                                About Us
+                            </a>
+                        </Link>
+                    </li>
+                    <li className="nav__item">
+                        <Link href="/shops">
+                            <a
+                                className={`nav__link ${
+                                    router.pathname == '/shops' ? 'active' : ''
+                                }`}
+                            >
+                                Shops
+                            </a>
+                        </Link>
+                    </li>
+                </div>
+                <div className="nav__section user">
+                    <li className="nav__item expand">
+                        <FaSearch className="search" onClick={expandSearch} />
+                        <FaBars onClick={expandMenu} />
+                    </li>
+                    <li className="nav__item">
+                        <form onSubmit={onSubmit}>
+                            <SearchField
+                                placeholder="Search sneakers"
+                                onChange={onChange}
                             />
-                        </a>
-                    </Link>
-                </li>
-                <li className="nav__item ">
-                    <Link href="/sneakers">
-                        <a
-                            className={`nav__link ${
-                                router.pathname == '/sneakers' ? 'active' : ''
-                            }`}
-                        >
-                            Sneakers
-                        </a>
-                    </Link>
-                </li>
-                <li className="nav__item">
-                    <Link href="/sneakers">
-                        <a
-                            className={`nav__link ${
-                                router.pathname == '/brands' ? 'active' : ''
-                            }`}
-                        >
-                            Brands
-                        </a>
-                    </Link>
-                </li>
-                <li className="nav__item">
-                    <Link href="/about">
-                        <a
-                            className={`nav__link ${
-                                router.pathname == '/about' ? 'active' : ''
-                            }`}
-                        >
-                            About Us
-                        </a>
-                    </Link>
-                </li>
-                <li className="nav__item">
-                    <Link href="/shops">
-                        <a
-                            className={`nav__link ${
-                                router.pathname == '/shops' ? 'active' : ''
-                            }`}
-                        >
-                            Shops
-                        </a>
-                    </Link>
-                </li>
-            </div>
-            <div className="nav__section user">
-                <li className="nav__item">
+                        </form>
+                    </li>
+                    <li className="nav__item">
+                        <Link href="/register">
+                            <a
+                                className={`nav__link ${
+                                    router.pathname == '/register'
+                                        ? 'active'
+                                        : ''
+                                }`}
+                            >
+                                Register
+                            </a>
+                        </Link>
+                    </li>
+                    <li className="nav__item">
+                        <Link href="/login">
+                            <a
+                                className={`nav__link ${
+                                    router.pathname == '/login' ? 'active' : ''
+                                }`}
+                            >
+                                Login
+                            </a>
+                        </Link>
+                    </li>
+                    <li className="nav__item">
+                        <Link href="/logout">
+                            <a
+                                className={`nav__link ${
+                                    router.pathname == '/logout' ? 'active' : ''
+                                }`}
+                            >
+                                Logout
+                            </a>
+                        </Link>
+                    </li>
+                    <li className="nav__item">
+                        <Link href="/cart">
+                            <a
+                                className={`nav__link nav__link--cart ${
+                                    router.pathname == '/cart' ? 'active' : ''
+                                }`}
+                            >
+                                <div className="cart">
+                                    <div className="img">
+                                        <Image
+                                            src="/images/shopping-cart.svg"
+                                            alt="cart icon"
+                                            layout="fill"
+                                        />
+                                    </div>
+                                    <div className="items__num">
+                                        {items.length}
+                                    </div>
+                                </div>
+                            </a>
+                        </Link>
+                    </li>
+                </div>
+            </NavigationStyles>
+            {searchVisible && (
+                <SearchStyles>
                     <form onSubmit={onSubmit}>
-                        <SearchField
-                            placeholder="Search sneakers"
-                            onChange={onChange}
+                        <input
+                            type="text"
+                            onChange={onChangeInput}
+                            className="searchInput"
+                            autoFocus
                         />
                     </form>
-                </li>
-                <li className="nav__item">
-                    <Link href="/register">
-                        <a
-                            className={`nav__link ${
-                                router.pathname == '/register' ? 'active' : ''
-                            }`}
-                        >
-                            Register
-                        </a>
-                    </Link>
-                </li>
-                <li className="nav__item">
-                    <Link href="/login">
-                        <a
-                            className={`nav__link ${
-                                router.pathname == '/login' ? 'active' : ''
-                            }`}
-                        >
-                            Login
-                        </a>
-                    </Link>
-                </li>
-                <li className="nav__item">
-                    <Link href="/logout">
-                        <a
-                            className={`nav__link ${
-                                router.pathname == '/logout' ? 'active' : ''
-                            }`}
-                        >
-                            Logout
-                        </a>
-                    </Link>
-                </li>
-                <li className="nav__item">
-                    <Link href="/cart">
-                        <a
-                            className={`nav__link nav__link--cart ${
-                                router.pathname == '/cart' ? 'active' : ''
-                            }`}
-                        >
-                            <div className="cart">
-                                <div className="img">
-                                    <Image
-                                        src="/images/shopping-cart.svg"
-                                        alt="cart icon"
-                                        layout="fill"
-                                    />
-                                </div>
-                                <div className="items__num">{items.length}</div>
-                            </div>
-                        </a>
-                    </Link>
-                </li>
-            </div>
-        </NavigationStyles>
+                </SearchStyles>
+            )}
+        </>
     );
 }

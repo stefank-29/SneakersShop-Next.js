@@ -95,6 +95,12 @@ const SliderStyles = styled.div`
             opacity: 1;
         }
     }
+    @media all and (max-width: 650px) {
+        width: 100%;
+        height: 65vh;
+        margin-left: auto;
+        margin-right: auto;
+    }
 `;
 
 export default function Slider() {
