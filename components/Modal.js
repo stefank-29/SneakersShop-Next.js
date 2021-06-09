@@ -78,6 +78,14 @@ const ModalStyles = styled.div`
             transform: translateY(0);
         }
     }
+
+    @media all and (max-width: 600px) {
+        .modal-content {
+            position: relative;
+            width: 80%;
+            margin-top: -10rem;
+        }
+    }
 `;
 
 export default function Modal({ itemIndex, setModalVisible }) {

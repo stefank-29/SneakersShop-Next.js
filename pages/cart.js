@@ -209,6 +209,91 @@ const ShoppingCartStyles = styled.div`
             }
         }
     }
+    @media all and (max-width: 950px) {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 1rem auto;
+        padding-bottom: 1rem;
+        .title {
+            display: block;
+            width: 90%;
+        }
+        .total {
+            display: block;
+            width: 80%;
+            span {
+                margin-left: 2rem;
+            }
+            .price {
+                font-weight: 700;
+                font-family: 'Lato', sans-serif;
+            }
+            &::before {
+                width: 50%;
+            }
+        }
+        .cart_item {
+            display: flex;
+            align-items: center;
+            width: 95%;
+            min-width: 10rem;
+            overflow: auto;
+            margin: 1rem auto;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            .img {
+                position: relative;
+                min-width: 12rem;
+                height: 12rem;
+            }
+            .details {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                min-width: 25rem;
+                height: 15rem;
+                font-size: 1.8rem;
+                padding: 1rem 3rem;
+                > * {
+                    margin-right: 2rem;
+                }
+            }
+            .price,
+            .remove {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                min-width: 15rem;
+                height: 15rem;
+                font-size: 2rem;
+                padding: 0 1rem;
+                margin-left: 1rem;
+                .removeBtn {
+                    font-size: 1.7rem;
+                    font-family: 'Avenir', sans-serif;
+                    border: 1px solid rgba(0, 0, 0, 0.4);
+                    background-color: rgba(30, 144, 255, 0.5);
+                    padding: 1rem 2rem;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                    :hover {
+                        color: white;
+                        background-color: rgba(30, 144, 255, 0.8);
+                    }
+                }
+            }
+            .remove {
+                margin-left: auto;
+                margin-right: 1rem;
+            }
+            &.header {
+                display: none;
+            }
+        }
+    }
 
     @media all and (max-width: 550px) {
         position: relative;

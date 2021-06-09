@@ -18,9 +18,22 @@ const NavigationStyles = styled.div`
         display: flex;
     }
     .nav__item {
+        position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
+        .brands-menu {
+            top: 9rem;
+            left: 0;
+            position: absolute;
+            background-color: whitesmoke;
+            width: 200%;
+            height: 20rem;
+            z-index: 5;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
     }
 
     .nav__link {
@@ -122,6 +135,50 @@ const NavigationStyles = styled.div`
         display: none;
     }
 
+    @media all and (max-width: 750px) {
+        align-items: center;
+        .nav__section {
+            display: block;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .react-search-field {
+            display: none;
+            width: 20rem;
+            visibility: hidden;
+        }
+        .react-search-field-button {
+            display: none;
+        }
+        .user {
+            margin-top: ${(props) => props.marginTop};
+        }
+        .nav__link {
+            height: 8rem;
+            width: 100%;
+            margin-right: 0;
+        }
+        .nav__item {
+            display: ${(props) => props.menu};
+        }
+        .logo {
+            display: block;
+        }
+        .expand {
+            display: flex;
+            height: 100%;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 2rem;
+            color: white;
+            font-size: 3rem;
+            .search {
+                margin-right: 2rem;
+                cursor: pointer;
+            }
+        }
+    }
     @media all and (max-width: 600px) {
         align-items: center;
         .nav__section {
@@ -194,6 +251,8 @@ export default function Navigation() {
     const [query, setQuery] = useState();
     const router = useRouter();
 
+    const [brandsMenuVisible, setBrandsMenuVisible] = useState(true);
+
     const [menuVisible, setMenuVisible] = useState(false);
     const [searchVisible, setSearchVisible] = useState(false);
 
@@ -234,6 +293,7 @@ export default function Navigation() {
                         onClick={() => {
                             setMenuVisible(false);
                             setSearchVisible(false);
+                            setBrandsMenuVisible(false);
                         }}
                     >
                         <Link
@@ -241,6 +301,7 @@ export default function Navigation() {
                             onClick={() => {
                                 setMenuVisible(false);
                                 setSearchVisible(false);
+                                setBrandsMenuVisible(false);
                             }}
                         >
                             <a className={`nav__link`}>
@@ -259,6 +320,7 @@ export default function Navigation() {
                         onClick={() => {
                             setMenuVisible(false);
                             setSearchVisible(false);
+                            setBrandsMenuVisible(false);
                         }}
                     >
                         <Link
@@ -266,6 +328,7 @@ export default function Navigation() {
                             onClick={() => {
                                 setMenuVisible(false);
                                 setSearchVisible(false);
+                                setBrandsMenuVisible(false);
                             }}
                         >
                             <a
@@ -282,25 +345,42 @@ export default function Navigation() {
                     <li
                         className="nav__item"
                         onClick={() => {
-                            setMenuVisible(false);
-                            setSearchVisible(false);
+                            setBrandsMenuVisible(!brandsMenuVisible);
                         }}
                     >
-                        <Link href="/sneakers">
-                            <a
-                                className={`nav__link ${
-                                    router.pathname == '/brands' ? 'active' : ''
-                                }`}
-                            >
-                                Brands
-                            </a>
-                        </Link>
+                        <a
+                            className={`nav__link ${
+                                router.pathname == '/brands' ? 'active' : ''
+                            }`}
+                        >
+                            Brands
+                        </a>
+                        {brandsMenuVisible && (
+                            <div className="brands-menu">
+                                <Link href="/sneakers?search=nike">
+                                    <a>Nike</a>
+                                </Link>
+                                <Link href="/sneakers?search=adidas">
+                                    <a>Adidas</a>
+                                </Link>
+                                <Link href="/sneakers?search=reebok">
+                                    <a>Reebok</a>
+                                </Link>
+                                <Link href="/sneakers?search=new balance">
+                                    <a>New Balance</a>
+                                </Link>
+                                <Link href="/sneakers?search=converse">
+                                    <a>Converse</a>
+                                </Link>
+                            </div>
+                        )}
                     </li>
                     <li
                         className="nav__item"
                         onClick={() => {
                             setMenuVisible(false);
                             setSearchVisible(false);
+                            setBrandsMenuVisible(false);
                         }}
                     >
                         <Link
@@ -331,6 +411,7 @@ export default function Navigation() {
                             onClick={() => {
                                 setMenuVisible(false);
                                 setSearchVisible(false);
+                                setBrandsMenuVisible(false);
                             }}
                         >
                             <a
@@ -368,6 +449,7 @@ export default function Navigation() {
                             onClick={() => {
                                 setMenuVisible(false);
                                 setSearchVisible(false);
+                                setBrandsMenuVisible(false);
                             }}
                         >
                             <a
@@ -386,6 +468,7 @@ export default function Navigation() {
                         onClick={() => {
                             setMenuVisible(false);
                             setSearchVisible(false);
+                            setBrandsMenuVisible(false);
                         }}
                     >
                         <Link
