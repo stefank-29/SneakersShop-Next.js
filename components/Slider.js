@@ -97,7 +97,7 @@ const SliderStyles = styled.div`
     }
     @media all and (max-width: 650px) {
         width: 100%;
-        height: 65vh;
+        height: 60vh;
         margin-left: auto;
         margin-right: auto;
     }

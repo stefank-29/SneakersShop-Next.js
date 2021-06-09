@@ -205,6 +205,18 @@ const NavigationStyles = styled.div`
         }
         .nav__item {
             display: ${(props) => props.menu};
+            .brands-menu {
+                top: 9rem;
+                left: 0;
+                position: absolute;
+                background-color: whitesmoke;
+                width: 200%;
+                height: 20rem;
+                z-index: 5;
+                padding: 2rem;
+                display: flex;
+                flex-direction: column;
+            }
         }
         .logo {
             display: block;
@@ -247,7 +259,7 @@ const SearchStyles = styled.div`
 `;
 
 export default function Navigation() {
-    const { items } = useCart();
+    const { items, user } = useCart();
     const [query, setQuery] = useState();
     const router = useRouter();
 
@@ -285,7 +297,7 @@ export default function Navigation() {
         <>
             <NavigationStyles
                 menu={menuVisible ? 'block' : 'none'}
-                marginTop={menuVisible ? '3rem' : 0}
+                marginTop={menuVisible ? '-6.8rem' : 0}
             >
                 <div className="nav__section pages">
                     <li
@@ -437,79 +449,88 @@ export default function Navigation() {
                             />
                         </form>
                     </li>
-                    <li
-                        className="nav__item"
-                        onClick={() => {
-                            setMenuVisible(false);
-                            setSearchVisible(false);
-                        }}
-                    >
-                        <Link
-                            href="/register"
+                    {user == null ? (
+                        <>
+                            <li
+                                className="nav__item"
+                                onClick={() => {
+                                    setMenuVisible(false);
+                                    setSearchVisible(false);
+                                }}
+                            >
+                                <Link
+                                    href="/register"
+                                    onClick={() => {
+                                        setMenuVisible(false);
+                                        setSearchVisible(false);
+                                        setBrandsMenuVisible(false);
+                                    }}
+                                >
+                                    <a
+                                        className={`nav__link ${
+                                            router.pathname == '/register'
+                                                ? 'active'
+                                                : ''
+                                        }`}
+                                    >
+                                        Register
+                                    </a>
+                                </Link>
+                            </li>
+                            <li
+                                className="nav__item"
+                                onClick={() => {
+                                    setMenuVisible(false);
+                                    setSearchVisible(false);
+                                    setBrandsMenuVisible(false);
+                                }}
+                            >
+                                <Link
+                                    href="/login"
+                                    onClick={() => {
+                                        setMenuVisible(false);
+                                        setSearchVisible(false);
+                                    }}
+                                >
+                                    <a
+                                        className={`nav__link ${
+                                            router.pathname == '/login'
+                                                ? 'active'
+                                                : ''
+                                        }`}
+                                    >
+                                        Login
+                                    </a>
+                                </Link>
+                            </li>{' '}
+                        </>
+                    ) : (
+                        <li
+                            className="nav__item"
                             onClick={() => {
                                 setMenuVisible(false);
                                 setSearchVisible(false);
-                                setBrandsMenuVisible(false);
                             }}
                         >
-                            <a
-                                className={`nav__link ${
-                                    router.pathname == '/register'
-                                        ? 'active'
-                                        : ''
-                                }`}
+                            <Link
+                                href="/logout"
+                                onClick={() => {
+                                    setMenuVisible(false);
+                                    setSearchVisible(false);
+                                }}
                             >
-                                Register
-                            </a>
-                        </Link>
-                    </li>
-                    <li
-                        className="nav__item"
-                        onClick={() => {
-                            setMenuVisible(false);
-                            setSearchVisible(false);
-                            setBrandsMenuVisible(false);
-                        }}
-                    >
-                        <Link
-                            href="/login"
-                            onClick={() => {
-                                setMenuVisible(false);
-                                setSearchVisible(false);
-                            }}
-                        >
-                            <a
-                                className={`nav__link ${
-                                    router.pathname == '/login' ? 'active' : ''
-                                }`}
-                            >
-                                Login
-                            </a>
-                        </Link>
-                    </li>
-                    <li
-                        className="nav__item"
-                        onClick={() => {
-                            setMenuVisible(false);
-                            setSearchVisible(false);
-                        }}
-                    >
-                        <Link
-                            href="/logout"
-                            onClick={() => {
-                                setMenuVisible(false);
-                                setSearchVisible(false);
-                            }}
-                        >
-                            <a
-                                className={`nav__link ${
-                                    router.pathname == '/logout' ? 'active' : ''
-                                }`}
-                            >
-                                Logout
-                            </a>
-                        </Link>
-                    </li>
+                                <a
+                                    className={`nav__link ${
+                                        router.pathname == '/logout'
+                                            ? 'active'
+                                            : ''
+                                    }`}
+                                >
+                                    Logout
+                                </a>
+                            </Link>
+                        </li>
+                    )}
                     <li
                         className="nav__item"
                         onClick={() => {
