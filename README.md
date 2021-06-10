@@ -30,6 +30,8 @@ git clone https://github.com/stefank-29/SneakersShop-Next.js.git
 Run project:
 
 ```
+npm install
+
 npm run dev
 ```
 
