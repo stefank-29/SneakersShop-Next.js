@@ -12,7 +12,7 @@ This is a sneakers shop responsive website built with React (Next.js).
 
 # Table of contents
 
--   [Project Title](#sneakers-shop)
+-   [Sneakers shop](#sneakers-shop)
 -   [Demo-Preview](#demo-preview)
 -   [Table of contents](#table-of-contents)
 -   [Installation](#installation)
