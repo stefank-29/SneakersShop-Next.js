@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Link from 'next/link';
+import { useState } from 'react';
 
 const LoginFormStyles = styled.form`
     position: relative;
@@ -112,6 +113,9 @@ const LoginFormStyles = styled.form`
 `;
 
 export default function Login() {
+    // const [username, setUsername] = useState();
+    // const [username, setUsername] = useState();
+
     function handleSubmit(e) {
         e.preventDefault();
 

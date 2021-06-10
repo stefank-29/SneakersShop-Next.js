@@ -263,7 +263,7 @@ export default function Navigation() {
     const [query, setQuery] = useState();
     const router = useRouter();
 
-    const [brandsMenuVisible, setBrandsMenuVisible] = useState(true);
+    const [brandsMenuVisible, setBrandsMenuVisible] = useState(false);
 
     const [menuVisible, setMenuVisible] = useState(false);
     const [searchVisible, setSearchVisible] = useState(false);

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -104,6 +104,8 @@ const SliderStyles = styled.div`
 `;
 
 export default function Slider() {
+    const [index, setIndex] = useState(1);
+
     function nextImage() {
         if (index !== 4) {
             setIndex(index + 1);
@@ -128,7 +130,16 @@ export default function Slider() {
     function showImageOnDot(index) {
         setIndex(index);
     }
-    const [index, setIndex] = useState(1);
+
+    useEffect(() => {
+        const id = setInterval(() => {
+            nextImage();
+        }, 2200);
+        return () => {
+            clearInterval(id);
+        };
+    }, [index]);
+
     return (
         <SliderStyles>
             <div id="slider">
