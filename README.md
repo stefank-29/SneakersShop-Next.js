@@ -33,6 +33,12 @@ Run project:
 npm run dev
 ```
 
+Open in browser at address:
+
+```
+http://127.0.0.1:3000/
+```
+
 ### Built with:
 
 -   React (Next.js)
