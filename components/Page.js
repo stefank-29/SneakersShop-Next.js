@@ -63,7 +63,7 @@ const GlobalStyles = createGlobalStyle`
             text-decoration: underline;
         }
     }
-
+    scroll-behavior: smooth;
 
     /* font u bodiju se ne odnosi na button */
     button{
