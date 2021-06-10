@@ -1,10 +1,12 @@
 # Sneakers Shop
 
-This is sneakers shop website built with React (Next.js).
+This is a sneakers shop responsive website built with React (Next.js).
 
 # Demo-Preview
 
 ![Image of project](sneakers-shop.gif)
+
+![Image of project](sneakers-responsive.gif)
 
 ## [Live demo of the project](https://sneakers-shop-next-js.vercel.app/)
 
